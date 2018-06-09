@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Магазин игрушек</title>
+	<link type="image/png" rel="shortcut icon" href="../images/favicon.png"/>
+	<link type="text/css" rel="stylesheet" href="../css/mystyle1.css">
+</head>
+<body>
+<header>
+	<span id="header_span1">Магазин "Игрушки"</span><br>
+</header>
+
+<div id="menu_div">
+	<ul id="menu">
+		<li><a href="main.html">Главная</a></li>
+		<li><a href="catalog.html">Каталог</a></li>
+		<li><a href="news.html">Новинки</a></li>
+		<li><a href="sales.html">Акции</a></li>
+		<li id="right_edge"><a href="connection.html">Контакты</a></li>
+	</ul>
+</div>
+
+<div id="main_div">
+
+	<div id="left_div">
+		<div class="button-div">
+			<a href="catalog.html">Каталог</a>
+		</div>
+		<div class="button-div">
+			<a href="sales.html">Акции</a>
+		</div>
+	</div>
+
+	<div id="center_div" class="base center">
+		<h2 class="center_div_h">Новые поступления</h2>
+        <div>
+		<script type="text/template" id="productsTemplate">
+			<img src="../images/favicon.png"><br>
+			<strong>Название: </strong><span><%= name %></span><br>
+			<strong>Цена: </strong><span><%= price %></span><br>
+			<strong>Раздел: </strong><span><%= type %></span><br>
+			<button class='add_to_case' data-id="<%= data_id %>">Добавить в корзину</button>
+		</script>
+        </div>
+	</div>
+
+	<div id="right_div">
+        <div id="case_div">
+            <span>Корзина</span>
+            <a href="case.html"><img src="../images/case.png" id="case_img"></a>
+            <div id="info_case">
+                <span>Количество: 0</span><br>
+                <span>Сумма: 0 рублей</span>
+            </div>
+            <div id="button_case">
+                <button class="case_cancel">Очистить</button>
+                <button class="case_apply">Оформить</button>
+            </div>
+        </div>
+	</div>
+    <button id="toTop"></button>
+	<div id="alert">Товар успешно добавлен в корзину</div>
+
+</div>
+<script src="../js/jquery.js"></script>
+<script src="../js/underscore.js"></script>
+<script src="../js/backbone.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/news.js"></script>
+<script src="../js/add_to_case.js"></script>
+<script src="../js/case.js"></script>
+<script src="../js/button-div.js"></script>
+<script src="../js/toTop.js"></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Магазин игрушек</title>
+    <link type="image/png" rel="shortcut icon" href="../images/favicon.png"/>
+    <link type="text/css" rel="stylesheet" href="../css/mystyle1.css">
+    <style>
+        @media screen and (min-height: 662px) {
+            html {
+                overflow-y: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <span id="header_span1">Магазин "Игрушки"</span><br>
+</header>
+
+<div id="menu_div">
+    <ul id="menu">
+        <li><a href="main.html">Главная</a></li>
+        <li><a href="catalog.html">Каталог</a></li>
+        <li><a href="news.html">Новинки</a></li>
+        <li><a href="sales.html">Акции</a></li>
+        <li id="right_edge"><a href="connection.html">Контакты</a></li>
+    </ul>
+</div>
+
+<div id="main_div">
+
+    <div id="left_div">
+        <div class="button-div">
+            <a href="catalog.html">Каталог</a>
+        </div>
+        <div class="button-div">
+            <a href="sales.html">Акции</a>
+        </div>
+    </div>
+
+    <div id="center_div" class="base center form">
+        <div class="center_div_h">Оформление заказа</div><br>
+
+        <div id="form_name">
+            Имя:<br><br>
+            Фамилия:<br><br>
+            Телефон:<br><br>
+            Почта:<br><br>
+            Выберите пункт выдачи:<br>
+        </div>
+        <form action="../php/form.php" method="post">
+            <div id="form_form">
+                <input type="text" maxlength="20" name="name">
+                <span class="form_error form_error_name">Введите своё имя</span><br><br>
+                <input type="text" maxlength="30" name="surname">
+                <span class="form_error form_error_surname">Введите свою фамилию</span><br><br>
+                <input type="text" pattern="8-[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" placeholder="8-xxx-xxx-xxxx">
+                <span class="form_error form_error_phone">Введите номер телефона</span><br><br>
+                <input type="text" maxlength="40" name="mail">
+                <span class="form_error form_error_mail">Введите свою почту</span><br><br>
+                <input type="radio" name="shop" value="Бадаева"><span class="form_radio">Бадаева, 6</span><br>
+                <input type="radio" name="shop" value="Ленинградская"><span class="form_radio">Ленинградская, 7</span><br>
+                <input type="radio" name="shop" value="Областная"><span class="form_radio">Областная, 1</span><br>
+                <span class="form_error form_error_shop">Выберите магазин<br></span><br>
+                <input id="quantity" type="hidden" name="quantity" value="1">
+                <input id="sum" type="hidden" name="sum" value="1">
+                <input id="all_id" type="hidden" name="products" value="">
+                <script src="../js/jquery.js"></script>
+                <script>
+                    $(document).ready(function() {var quantity = localStorage.getItem('quantity');
+                        var quantity = localStorage.getItem('quantity');
+                        if (quantity == 0) {
+                            $(".form").html("Вы не можете сделать заказ, так как корзина пуста.");
+                            return false;
+                        }
+                        var sum = localStorage.getItem('sum');
+                        var count = localStorage.getItem('count');
+                        $('#quantity').attr('value', quantity);
+                        $('#sum').attr('value', sum);
+
+                        $('#form_form').append('Количество: ' + quantity + '<br>');
+                        $('#form_form').append('Сумма: ' + sum + ' рублей<br><br>');
+
+                        for (var i = 1; i <=count; i++) {
+                            var product = JSON.parse(localStorage.getItem('product' + i));
+                            $('#all_id').attr('value', $('#all_id').attr('value') + ' ' + product.id + ' x ' + product.count + ';');
+                            console.log($('#all_id').attr('value'));
+                        }
+                    });
+
+                </script>
+            </div>
+            <input type="submit" value="Сделать заказ" class="colorful_button button_submit">
+            <script>
+                $("form input[type='submit']").click(function() {
+                    if ($("form input[name='name']").val().trim() === '') {
+                        console.log("name:" + $("form input[name='name']").val());
+                        $("#form_form .form_error_name").show();
+                        return false;
+                    } else $("#form_form .form_error_name").hide();
+                    if ($("form input[name='surname']").val().trim() === '') {
+                        console.log("surname:" + $("form input[name='surname']").val());
+                        $("#form_form .form_error_surname").show();
+                        return false;
+                    } else $("#form_form .form_error_surname").hide();
+                    if ($("form input[name='phone']").val().trim() === '') {
+                        console.log("phone:" + $("form input[name='phone']").val());
+                        $("#form_form .form_error_phone").show();
+                        return false;
+                    } else $("#form_form .form_error_phone").hide();
+                    if ($("form input[name='mail']").val().trim() === '') {
+                        console.log("mail:" + $("form input[name='mail']").val());
+                        $("#form_form .form_error_mail").show();
+                        return false;
+                    } else $("#form_form .form_error_mail").hide();
+                    if ($("form input[name='shop']:checked").val() === undefined) {
+                        console.log("shop:" + $("form input[name='shop']:checked").val());
+                        $("#form_form .form_error_shop").show();
+                        return false;
+                    } else $("#form_form .form_error_shop").hide();
+                });
+            </script>
+        </form>
+    </div>
+
+    <div id="right_div">
+        <div class="button-div">
+            <a href="case.html">Корзина</a>
+        </div>
+        <div class="button-div">
+            <a href="news.html">Новинки</a>
+        </div>
+    </div>
+
+</div>
+<script src="../js/button-div.js"></script>
+<script src="../js/form.js"></script>
+</body>
+</html>
